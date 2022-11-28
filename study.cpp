@@ -35,6 +35,7 @@ class String
 //===КОНСТРУКТОР ПО УМОЛЧАНИЮ ДЛЯ СОЗДАНИЯ СТРОКИ НУЛЕВОЙ ДЛИНЫ
 String::String()
 {
+    std::cout << "Вызван обычный конструктор для создания строки нулевой длины\n";
     itsString = new char[1];
     itsString[0] = '\0';
     itsLen=0;
@@ -51,9 +52,10 @@ String::String(unsigned short len)
 }
 
 
-//===СИМВОЛЬНЫЙ МАССИВ В СТРОКУ
-String::String(const char * const cString)
+//===КОНСТРУКТОР КОТОРОМУ ПОДАЕТСЯ СИМВОЛЬНЫЙ МАССИВ (указатель типа const char *)
+String::String(const char * const cString) // неизменяемый указатель на неизменяемую строку
 {
+    std::cout << "Вызван конструктор на вход которому подается символьный массив\n";
     itsLen = strlen(cString);
     itsString = new char[itsLen+1];
     for (unsigned short i=0; i < itsLen; i++)
@@ -82,8 +84,6 @@ String::~String()
 
 
 
-
-
 String& String::operator=(const String & rhs)
 {
     if (this == &rhs)
@@ -95,7 +95,7 @@ String& String::operator=(const String & rhs)
     {
         itsString[i] = rhs[i];
     }
-    itsString[itsLen] = '\n';
+    itsString[itsLen] = '\0';
     return *this;
 
 }
@@ -163,8 +163,39 @@ void String::operator+=(const String& rhs)
 int main()
 {
 
-    String s1("hello");
+    const char * mystring = "test test test";
+    String s1(mystring);
     std::cout << "S1:\t" << s1.GetString() <<  std::endl;
+    String s2;
+
+
+    //char * temp = "Hello World";
+    //s1 = "asdfasdf";
+    //std::cout << "S1:\t" << s1.GetString() << "  длина строки: " << s1.GetLen() << std::endl;
+
+    int array[3][3];
+    for(int i=0; i<3; i++)
+    {
+        for(int j=0; j<3; j++)
+            array[i][j] = 0;
+    }
+
+    
+    for(int i=0; i<3; i++)
+        for(int j=0; j<3; j++)
+            printf("array[%d][%d] = %d \n", i, j, array[i][j]);
+
+
+    const char * names[] = {"Igor", "Sasha", "Ilya", "Vadim"};
+    const char * secondnames[] = {"Parandiuk","Sergievskijj", "Kainov", "Toma"};
+    const char * fio[] = {"I.P.", "S.S.", "I.K.", "V.T."};
+
+    char * fullnames[4];
+
+    strncpy(fullnames[0], names[0], strlen(names[0]));
+    std::cout << names[0] << names[1];
+
+
 
 
     return 0;
