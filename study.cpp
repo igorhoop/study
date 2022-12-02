@@ -190,10 +190,70 @@ int main()
     const char * secondnames[] = {"Parandiuk","Sergievskijj", "Kainov", "Toma"};
     const char * fio[] = {"I.P.", "S.S.", "I.K.", "V.T."};
 
+
     char * fullnames[4];
 
-    strncpy(fullnames[0], names[0], strlen(names[0]));
-    std::cout << names[0] << names[1];
+    // инициализация массива с помощью брания памяти в куче
+    for (int i=0; i < 4; i++)
+    {
+        fullnames[i] = new char[100]; // строка наврядли будет больше 100 символов
+        strncpy(fullnames[i], names[i], strlen(names[i]));
+    }
+
+
+    // добавляем к финальной строке фамилию
+
+    for (int i=0; i < 4; i++)
+    {
+        int lenNames = strlen(names[i]);
+        int lenSecondnames = strlen(secondnames[i]);
+
+
+        // добавляем пробел в конец массива перед конкатенацией
+        strncpy(fullnames[i] + lenNames, " ", 1);
+
+        strncpy(fullnames[i] + (lenNames+1), secondnames[i], lenSecondnames);
+    }
+
+    // добавляем к финальной строке ФИО
+
+    for (int i=0; i < 4; i++)
+    {
+        int lenLast = strlen(fullnames[i]);
+        int lenFio = strlen(fio[i]);
+
+        // добавляем пробел в конец массива перед конкатенацией
+        strncpy(fullnames[i] + lenLast, " ", 1);
+
+        strncpy(fullnames[i] + (lenLast+1), fio[i], lenFio);
+    }
+
+
+    
+    
+
+    printf("Адрес начала: %p \n", fullnames);
+    printf("Адрес 1: %s \n", fullnames[0]);
+    printf("Адрес 2: %s \n", fullnames[1]);
+    printf("Адрес 3: %s \n", fullnames[2]);
+    printf("Адрес 4: %s \n", fullnames[3]);
+
+
+    printf("\n\n\n\n");
+
+    
+    int * Array[500];
+    printf("Указатель на указатель: %p \n", &Array);
+    printf("Адрес начала Array: %p \n", Array);
+    printf("Адрес ячейки 0: %p \n", &Array[0]);
+    printf("Адрес ячейки 1: %p \n", &Array[1]);
+    printf("Адрес ячейки 2: %p \n", &Array[2]);
+    printf("Адрес ячейки 3: %p \n", &Array[3]);
+    printf("Адрес ячейки 4: %p \n", &Array[4]);
+    printf("Адрес ячейки 5: %p \n", &Array[5]);
+    printf("Адрес ячейки 6: %p \n", &Array[6]);
+
+    std::cout << Array;
 
 
 
