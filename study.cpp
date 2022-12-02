@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <string.h>
+#include <limits>
 
 class String
 {
@@ -253,8 +254,19 @@ int main()
     printf("Адрес ячейки 5: %p \n", &Array[5]);
     printf("Адрес ячейки 6: %p \n", &Array[6]);
 
-    std::cout << Array;
+    std::cout << Array << std::endl;
 
+    printf("\n\n\n\n\n\n");
+
+    char newstring[300];
+    char newstring2[300];
+
+    std::cin.getline(newstring, 100, 's');
+    printf("просто вывод текста\n");
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+    std::cin.getline(newstring2, 100, 's');
+    printf("Строка: %s\n", newstring);
+    printf("Строка: %s\n", newstring2);
 
 
 
